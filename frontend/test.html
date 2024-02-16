@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP Service Data</title>
+</head>
+<body>
+    <h1>Employee Data</h1>
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody id="employeeData">
+            <!-- Les données seront insérées ici -->
+        </tbody>
+    </table>
+
+    <script>
+        const soap = require('soap');
+
+        // Adresse du WSDL du service SOAP
+        const wsdlUrl = 'http://localhost:8080/employeeService?wsdl';
+
+        // Créer un client SOAP en utilisant le WSDL
+        soap.createClient(wsdlUrl, (err, client) => {
+            if (err) {
+                console.error('Erreur lors de la création du client SOAP:', err);
+                return;
+            }
+
+            // Appeler l'opération getAllEmployees
+            client.getAllEmployees({}, (err, response) => {
+                if (err) {
+                    console.error('Erreur lors de l\'appel de getAllEmployees:', err);
+                    return;
+                }
+                console.log('Résultat de getAllEmployees:', response);
+
+                // Afficher les données dans le tableau
+                const employeeTable = document.getElementById('employeeData');
+                response.forEach(employee => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${employee.id}</td>
+                        <td>${employee.name}</td>
+                        <td>${employee.salary}</td>
+                    `;
+                    employeeTable.appendChild(row);
+                });
+            });
+
+            // Autres appels d'opérations ici...
+        });
+    </script>
+</body>
+</html>

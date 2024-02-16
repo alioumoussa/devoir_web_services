@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start</title>
+    <link rel="stylesheet" href="css/start.css"> <!-- Ajout de la feuille de style CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Test des services</h1>
+        <p>Choisissez l'un des services ci-dessous pour continuer :</p>
+        <button onclick="testSOAP()">Tester le service SOAP</button>
+        <button onclick="testREST()">Tester le service REST</button>
+    </div>
+
+    <script>
+        function testSOAP() {
+            window.location.href = "/soap";
+        }
+
+        function testREST() {
+            window.location.href = "/rest";
+        }
+    </script>
+</body>
+</html>

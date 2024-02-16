@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des employés</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="css/styles.css"> <!-- Assurez-vous de changer le chemin selon votre structure de dossiers -->
+    <!-- Script pour déterminer la baseURL -->
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Liste des employés</h1>
+            <input type="text" id="search" placeholder="Rechercher...">
+            <a href="<%= baseURL %>/addEmployee" class="add-button">Ajouter un employé</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Salaire</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% employees.forEach(employee => { %>
+                    <tr>
+                        <td><%= employee.id %></td>
+                        <td><%= employee.name %></td>
+                        <td><%= employee.salary %></td>
+                        <td>
+                            <a href="<%= baseURL %>/delete/<%= employee.id %>" class="delete" onclick="return confirm('Voulez-vous vraiment supprimer cet employé ?')">Supprimer</a>
+                            <a href="<%= baseURL %>/employees/<%= employee.id %>" class="update">Update</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        
+    </div>
+
+    <!-- Script pour déterminer la baseURL -->
+</body>
+</html>
